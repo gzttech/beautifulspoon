@@ -30,7 +30,7 @@ METHODS = {
         'argument_dict': {
             'action': 'store',
             'nargs': 2,
-            'metavar': 'NAME, VALUE'
+            'metavar': ('NAME', 'VALUE'),
         } ,
         'method': '_set_attr',
         'args': [
@@ -80,7 +80,7 @@ METHODS = {
         'argument_dict': {
             'action': 'store',
             'nargs': 2,
-            'metavar': 'POS, HTML'
+            'metavar': ('POS', 'HTML'),
         },
         'method': 'insert',
         'args': [
@@ -145,6 +145,7 @@ METHODS = {
         'argument': ['-w', '--wrap'],
         'argument_dict': {
             'action': 'store',
+            'metavar': 'HTML'
         },
         'method': 'wrap',
         'args': [{
