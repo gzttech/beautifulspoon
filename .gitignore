@@ -1,0 +1,77 @@
+*.log
+
+*.py[cod]
+
+# sqlite files
+*.db
+
+# C extensions
+*.so
+
+# Other version control
+.svn
+
+# swap files
+*.swp
+*.orig
+
+# temp files
+status_code.json
+**#
+**~
+
+# key and certificate files
+*.csr
+*.crt
+*.key
+
+# static dir
+static
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+__pycache__
+develop-eggs
+.installed.cfg
+lib
+lib64
+.venv
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# node.js
+node_modules
+build
+
+# Project related
+*.#*
+*migrations*
+template
+debug.sh
+venv
+__pycache__
+debug/
+.idea/
+.cache/
+env.local

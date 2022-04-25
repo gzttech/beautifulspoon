@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "beautifulspoon"
+version = "0.0.1"
+description = ""
+authors = ["Gongziting Tech Ltd."]
+license = "MIT"
+homepage = "https://github.com/gzttech/beautifulspoon"
+
+[tool.poetry.scripts]
+beautifulspoon = 'beautifulspoon.cli:main'
+bspoon = 'beautifulspoon.cli:main'
+
+[tool.poetry.dependencies]
+python = "^3.7"
+beautifulsoup4 = "^4.10"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
