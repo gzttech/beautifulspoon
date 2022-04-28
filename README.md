@@ -65,7 +65,7 @@ $ bspoon test.html --select a --append '<b>Home</b>'|bspoon --select a
 
 - `--extend`, extend the string(text) of the selected node. Adding `--smooth` may help _smooth_ the extended content. 
 ```
-# bspoon test.html --select a --extend ' It' --smooth|bspoon --select a
+$ bspoon test.html --select a --extend ' It' --smooth|bspoon --select a
 <a href="https://www.google.com">
  Google
     It
