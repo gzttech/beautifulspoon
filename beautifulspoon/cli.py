@@ -18,7 +18,8 @@ METHODS = {
         'argument': ['--set_name'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'NAME'
+            'metavar': 'NAME',
+            'help': 'Set the tag name of the selected node.'
         } ,
         'method': '_set_name',
         'args': [{
@@ -31,6 +32,7 @@ METHODS = {
             'action': 'store',
             'nargs': 2,
             'metavar': ('NAME', 'VALUE'),
+            'help': 'Set the attribute(i.e., the name/value pair) of the selected node.'
         } ,
         'method': '_set_attr',
         'args': [
@@ -46,7 +48,8 @@ METHODS = {
         'argument': ['--set_string'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'STRING'
+            'metavar': 'STRING',
+            'help': 'The the string(text) of the selected node.'
         } ,
         'method': '_set_string',
         'args': [{
@@ -57,7 +60,8 @@ METHODS = {
         'argument': ['-a', '--append'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'HTML'
+            'metavar': 'HTML',
+            'help': 'Append a node(HTML) inside the selected node.'
         } ,
         'method': 'append',
         'args': [{
@@ -68,11 +72,12 @@ METHODS = {
         'argument': ['-e', '--extend'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'STRING'
+            'metavar': 'STRING',
+            'help': 'Extend the string(text) of the selected node.'
         } ,
         'method': 'extend',
         'args': [{
-            'type': str
+            'type': lambda x: [str(x)]
         }]
     },
     'insert': {
@@ -81,6 +86,7 @@ METHODS = {
             'action': 'store',
             'nargs': 2,
             'metavar': ('POS', 'HTML'),
+            'help': 'Insert a node(HTML) at the POS position of the seleted node.'
         },
         'method': 'insert',
         'args': [
@@ -96,7 +102,8 @@ METHODS = {
         'argument': ['--ib', '--insert_before'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'HTML'
+            'metavar': 'HTML',
+            'help': 'Insert a node(HTML) at the first position of the seleted node.'
         },
         'method': 'insert_before',
         'args': [{
@@ -107,7 +114,8 @@ METHODS = {
         'argument': ['--ia', '--insert_after'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'HTML'
+            'metavar': 'HTML',
+            'help': 'Insert a node(HTML) at the last position of the seleted node.'
         },
         'method': 'insert_after',
         'args': [{
@@ -118,6 +126,7 @@ METHODS = {
         'argument': ['-c', '--clear'],
         'argument_dict': {
             'action': 'store_true',
+            'help': 'Clear the inner content of the seleted node.'
         },
         'method': 'clear',
         'args': []
@@ -126,6 +135,7 @@ METHODS = {
         'argument': ['-d', '--decompose'],
         'argument_dict': {
             'action': 'store_true',
+            'help': 'Remove the node along with its inner content of the seleted node.'
         },
         'method': 'decompose',
         'args': []
@@ -134,7 +144,8 @@ METHODS = {
         'argument': ['-r', '--replace_with'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'HTML'
+            'metavar': 'HTML',
+            'help': 'Replace the seleted node with HTML.'
         },
         'method': 'replace_with',
         'args': [{
@@ -145,7 +156,8 @@ METHODS = {
         'argument': ['-w', '--wrap'],
         'argument_dict': {
             'action': 'store',
-            'metavar': 'HTML'
+            'metavar': 'HTML',
+            'help': 'Wrap the seleted node with tag provided(HTML).'
         },
         'method': 'wrap',
         'args': [{
@@ -156,6 +168,7 @@ METHODS = {
         'argument': ['-u', '--unwrap'],
         'argument_dict': {
             'action': 'store_true',
+            'help': 'Unwrap the seleted node.'
         },
         'method': 'unwrap',
         'args': []
@@ -184,6 +197,9 @@ def update_method_args(parser):
 
 def parse_args(parser):
     parser.add_argument("--select", default='')
+    parser.add_argument("--smooth",
+                        action='store_true',
+                        help='Smooth the seleted node.')
     parser.add_argument("file", default='', nargs="?")
     update_method_args(parser)
     return parser.parse_known_args()
@@ -212,10 +228,13 @@ def execute_methods(selected, args):
 def main():
     parser = argparse.ArgumentParser(prog="beautifulsoup", add_help=True)
     args, rest = parse_args(parser)
-    if not sys.stdin.isatty():
+    if args.file:
+        source_fd = open(args.file)
+    elif not sys.stdin.isatty():
         source_fd = sys.stdin
     else:
-        source_fd = open(args.file)
+        parser.print_help()
+        sys.exit(0)
     doc = bs4.BeautifulSoup(source_fd, 'html.parser')
     ret = doc
     if args.select:
@@ -223,7 +242,10 @@ def main():
         handled = execute_methods(selected, vars(args))
         if handled == False:
             ret = selected
-    print(ret.prettify())
+        if selected and args.smooth:
+            selected.smooth()
+    if ret:
+        print(ret.prettify())
 
 
 if __name__ == '__main__':
