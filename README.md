@@ -110,6 +110,14 @@ $ bspoon test.html --select a --replace_with '<br/>'| bspoon --select div
 </div>
 ```
 
+- `--comment`, Comment the selected node.
+```
+$ bspoon test.html --select a --comment|bspoon --select div
+<div class="container" id="root">
+ <!-- <a href="https://www.google.com">Google</a> -->
+</div>
+```
+
 - `--wrap`, wrap the seleted node with tag provided(HTML).
 ```
 $ bspoon test.html --select a --wrap '<p></p>'
