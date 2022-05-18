@@ -173,6 +173,15 @@ METHODS = {
         'method': 'unwrap',
         'args': []
     },
+    'comment': {
+        'argument': ['--comment'],
+        'argument_dict': {
+            'action': 'store_true',
+            'help': 'Comment the seleted node.'
+        },
+        'method': '_comment',
+        'args': []
+    },
 }
 
 
@@ -186,6 +195,10 @@ def _set_attr(selected, name, value):
 
 def _set_string(selected, value):
     selected.string = value
+
+
+def _comment(selected):
+    selected.replace_with(soup('<!-- %s -->' % str(selected)))
 
 
 def update_method_args(parser):
