@@ -213,6 +213,9 @@ def parse_args(parser):
     parser.add_argument("--smooth",
                         action='store_true',
                         help='Smooth the seleted node.')
+    parser.add_argument("--get_text",
+                        action='store_true',
+                        help='Get the text of the selected node.')
     parser.add_argument("file", default='', nargs="?")
     update_method_args(parser)
     return parser.parse_known_args()
@@ -258,7 +261,11 @@ def main():
         if selected and args.smooth:
             selected.smooth()
     if ret:
-        print(ret.prettify())
+        if args.get_text:
+            print(ret.get_text())
+        else:
+            print(ret.prettify())
+
 
 
 if __name__ == '__main__':
