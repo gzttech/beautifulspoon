@@ -77,7 +77,7 @@ $ bspoon test.html --select a --extend ' It' --smooth|bspoon --select a
 </a>
 ```
 
-- `--insert`, insert a node(HTML) at the POS position of the seleted node. Arguments `--insert_before` and `--insert_after` are the same with `--insert`, with insert position specified at the first and the last slots.
+- `--insert`, insert a node(HTML) at the POS position inside the selected node. Arguments `--insert_before` and `--insert_after` are the same with `--insert`, with insert position specified at the first and the last slots.
 ```
 $ bspoon test.html --select div --insert 0 '<br/>'| bspoon --select div
 <div class="container" id="root">
@@ -85,6 +85,28 @@ $ bspoon test.html --select div --insert 0 '<br/>'| bspoon --select div
  <a href="https://www.google.com">
   Google
  </a>
+</div>
+```
+
+-- `--insert_before`(`--ib`), insert a node(HTML) before the selected node.
+```
+$ bspoon test.html --select a --insert_before '<br/>'|bspoon --select div
+<div class="container" id="root">
+ <br/>
+ <a href="https://www.google.com">
+  Google
+ </a>
+</div>
+```
+ 
+-- `--insert_after`(`--ia`), insert a node(HTML) next to the position of the selected node.
+```
+$ bspoon test.html --select a --ia '<br/>'|bspoon --select div
+<div class="container" id="root">
+ <a href="https://www.google.com">
+  Google
+ </a>
+ <br/>
 </div>
 ```
 

@@ -103,7 +103,7 @@ METHODS = {
         'argument_dict': {
             'action': 'store',
             'metavar': 'HTML',
-            'help': 'Insert a node(HTML) at the first position of the seleted node.'
+            'help': 'Insert a node(HTML) before the seleted node.'
         },
         'method': 'insert_before',
         'args': [{
@@ -115,7 +115,7 @@ METHODS = {
         'argument_dict': {
             'action': 'store',
             'metavar': 'HTML',
-            'help': 'Insert a node(HTML) at the last position of the seleted node.'
+            'help': 'Insert a node(HTML) after the seleted node.'
         },
         'method': 'insert_after',
         'args': [{
