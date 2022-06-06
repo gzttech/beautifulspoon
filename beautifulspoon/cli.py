@@ -99,7 +99,7 @@ METHODS = {
         ]
     },
     'insert_before': {
-        'argument': ['--ib', '--insert_before'],
+        'argument': ['--insert_before', '--ib'],
         'argument_dict': {
             'action': 'store',
             'metavar': 'HTML',
@@ -111,7 +111,7 @@ METHODS = {
         }]
     },
     'insert_after': {
-        'argument': ['--ia', '--insert_after'],
+        'argument': ['--insert_after', '--ia'],
         'argument_dict': {
             'action': 'store',
             'metavar': 'HTML',
@@ -119,7 +119,7 @@ METHODS = {
         },
         'method': 'insert_after',
         'args': [{
-            'type': str
+            'type': soup
         }]
     },
     'clear': {
