@@ -216,6 +216,9 @@ def parse_args(parser):
     parser.add_argument("--get_text",
                         action='store_true',
                         help='Get the text of the selected node.')
+    parser.add_argument("--output", "-o",
+                        default='',
+                        help='Output filename, blank for stdout.')
     parser.add_argument("file", default='', nargs="?")
     update_method_args(parser)
     return parser.parse_known_args()
@@ -251,7 +254,9 @@ def main():
     else:
         parser.print_help()
         sys.exit(0)
-    doc = bs4.BeautifulSoup(source_fd, 'html.parser')
+    source_content = source_fd.read()
+    source_fd.close()
+    doc = bs4.BeautifulSoup(source_content, 'html.parser')
     ret = doc
     if args.select:
         selected = doc.select_one(args.select)
@@ -261,11 +266,12 @@ def main():
         if selected and args.smooth:
             selected.smooth()
     if ret:
+        output_fd = open(args.output, 'w') if args.output else sys.stdout
         if args.get_text:
-            print(ret.get_text())
+            print(ret.get_text(), file=output_fd)
         else:
-            print(ret.prettify())
-
+            print(ret.prettify(), file=output_fd)
+        output_fd.close()
 
 
 if __name__ == '__main__':
