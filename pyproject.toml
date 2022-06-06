@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "beautifulspoon"
-version = "0.0.2"
+version = "0.0.3"
 readme = 'README.md'
 description = ""
 authors = ["Gongziting Tech Ltd."]
@@ -12,7 +12,7 @@ beautifulspoon = 'beautifulspoon.cli:main'
 bspoon = 'beautifulspoon.cli:main'
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.6.8"
 beautifulsoup4 = "^4.10"
 
 [tool.poetry.dev-dependencies]
