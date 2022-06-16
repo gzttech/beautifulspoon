@@ -88,7 +88,7 @@ $ bspoon test.html --select div --insert 0 '<br/>'| bspoon --select div
 </div>
 ```
 
--- `--insert_before`(`--ib`), insert a node(HTML) before the selected node.
+- `--insert_before`(`--ib`), insert a node(HTML) before the selected node.
 ```
 $ bspoon test.html --select a --insert_before '<br/>'|bspoon --select div
 <div class="container" id="root">
@@ -99,7 +99,7 @@ $ bspoon test.html --select a --insert_before '<br/>'|bspoon --select div
 </div>
 ```
  
--- `--insert_after`(`--ia`), insert a node(HTML) next to the position of the selected node.
+- `--insert_after`(`--ia`), insert a node(HTML) next to the position of the selected node.
 ```
 $ bspoon test.html --select a --ia '<br/>'|bspoon --select div
 <div class="container" id="root">
